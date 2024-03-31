@@ -17,5 +17,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor-typed" % "2.6.10",
   "com.typesafe.akka" %% "akka-http" % "10.2.0",
   "com.typesafe.akka" %% "akka-stream" % "2.6.10",
-  "com.typesafe.play" %% "play-json" % "2.9.2"
+  "com.typesafe.play" %% "play-json" % "2.9.2",
+  "org.scalatest" %% "scalatest" % "3.2.18" % "test",
+  "org.scalatest" %% "scalatest-flatspec" % "3.2.18" % "test"
 )

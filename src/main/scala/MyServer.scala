@@ -15,7 +15,9 @@ object MySever {
     val route =
       path("misezan") {
         parameters("arg1".as[Int], "arg2".as[Int]) { (arg1, arg2) =>
-          complete((arg1 + arg2).toString + "\n")
+          val misezan = new Misezan()
+          val result: Int = misezan.calculate(arg1, arg2)
+          complete(result.toString + "\n")
         }
       }
 
