@@ -1,11 +1,23 @@
-import rules._
+import rules.AppliedJudgeRule
 
 class Misezan(){
 
-    def calculate(arg1: Int, arg2: Int): Int = {
-        (arg1, arg2) match {
-            case (a, b) if isEqual(a, b) => 0
-            case _ => arg1+arg2
+    val ajr = new AppliedJudgeRule()
+
+    def calculate(num1: Int, num2: Int): Double = {
+        (ajr.isEqual(num1,num2), ajr.isCombination2and5(num1, num2), ajr.isCombination6and9(num1, num2), ajr.is100TimesOrOver(num1, num2)) match {
+            case (true, _, _, _) => 0.0
+            case (false, true, _, _) => 1.1
+            case (false, _, true, _) => 11.0
+            case (false, _, _, true) => 
+                if (ajr.isLargeFirstArgument(num1, num2)) num1 - (num2 * 17)
+                else num2 - (num1 * 17)
+            case _ => this.returnLargeNumber(num1, num2).toDouble
         }
+    }
+    
+    private def returnLargeNumber(num1: Int, num2: Int): Int = {
+        if (num1 > num2) num1
+        else num2
     }
 }

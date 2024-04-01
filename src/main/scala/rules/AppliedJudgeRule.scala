@@ -1,6 +1,8 @@
 package rules
 
-class AppliedJudgeRule() extend JudgeRule{
+import rules.JudgeRule
+
+class AppliedJudgeRule() extends JudgeRule{
 
     // 2か5の両方もしくはいずれかで構成されるかつ桁数が同じ数字同士かどうか
     def isCombination2and5(num1: Int, num2: Int): Boolean = {
