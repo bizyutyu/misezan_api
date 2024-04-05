@@ -16,8 +16,8 @@ object MySever {
       path("misezan") {
         parameters("arg1".as[Int], "arg2".as[Int]) { (arg1, arg2) =>
           val misezan = new Misezan()
-          val result: Int = misezan.calculate(arg1, arg2)
-          complete(result.toString + "\n")
+          val result: Double = misezan.calculate(arg1, arg2)
+          complete("眼は" + result.toString + "です\n")
         }
       }
 
