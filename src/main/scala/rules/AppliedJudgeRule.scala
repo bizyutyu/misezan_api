@@ -26,23 +26,26 @@ class AppliedJudgeRule() extends JudgeRule{
 
     // 一方がもう一方の100倍以上かどうか
     def is100TimesOrOver(num1: Int, num2: Int): Boolean = {
-        num1 / num2 >= 100 || num2 / num1 >= 100
+        if (num1 == 0 || num2 == 0) false
+        else (num1.toDouble / num2) >= 100 || (num2.toDouble / num1) >= 100
     }
     
     // 桁数が同じかどうか
     private def isSameNumberOfDigits(num1: Int, num2: Int): Boolean = {
         // toIntによって切り捨てが行われるので+1する
         // 現状はプライスマイナスの区別をしていない
-        // 今度対応したい
-        val digitsNum1 = if (num1 == 0) 1 else math.log10(math.abs(num1)).toInt + 1
-        val digitsNum2 = if (num2 == 0) 1 else math.log10(math.abs(num2)).toInt + 1
+        // 0の場合はfalseにしている
+        val digitsNum1 = if (num1 == 0) false else math.log10(math.abs(num1)).toInt + 1
+        val digitsNum2 = if (num2 == 0) false else math.log10(math.abs(num2)).toInt + 1
         digitsNum1 == digitsNum2
     }
 
-    // 与えられた数字のすべての桁が与えられた２つの数字から成るか
+    // 第3引数として与えられた数字のすべての桁が、第1・第2引数で与えられた２つの数字の組み合わせから成るか
     // リストを使えば数字の数を気にしなくて良くなるがやってない
     private def areAllDigitsXY(c1: Int, c2: Int, num: Int): Boolean = {
-        num.toString.forall(c => c == c1.toChar || c == c2.toChar)
+        // num.toString.toList.forall(c => c == c1.toChar || c == c2.toChar)
+          val digitsSet = num.toString.toSet
+          digitsSet.subsetOf(Set(c1.toString.head, c2.toString.head))
     }
 
     // private def isPlus(num: Int): String = {
